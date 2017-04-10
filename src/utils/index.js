@@ -36,3 +36,13 @@ const _HOUR_DISPLAY_MAP = [
  */
 // TODO: Implement using a more programmatic approach instead of map
 export const getDisplayHour = (hour) => _HOUR_DISPLAY_MAP[hour]
+
+/**
+ * Given a list of events, returns the event object whose id matches the specified eventId
+ * @param {array} events - List of event objects
+ * @param {number} eventId - ID of event to find
+ * @returns {object}
+ */
+export const getEventFromEvents = (events, eventId) => (
+    events.find(({id}) => id === eventId)
+)

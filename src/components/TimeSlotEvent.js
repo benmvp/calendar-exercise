@@ -1,20 +1,22 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import {EVENT_PROP_TYPE} from './constants';
 
 import './TimeSlotEvent.css';
 
 export default class TimeSlotEvent extends PureComponent {
     static propTypes = {
-        event: EVENT_PROP_TYPE.isRequired
+        event: EVENT_PROP_TYPE.isRequired,
+        onSelect: PropTypes.func.isRequired,
     }
 
     render() {
         let {
-            event: {title, color}
+            event: {title, color},
+            onSelect,
         } = this.props;
 
         return (
-            <button className={`time-slot-event time-slot-event--${color}`}>
+            <button className={`time-slot-event time-slot-event--${color}`} onClick={onSelect}>
                 {title}
             </button>
         );
