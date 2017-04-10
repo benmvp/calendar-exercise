@@ -29,7 +29,7 @@ const EVENTS = [
       id: 4,
       title: 'Decentralized system-worthy hardware',
       description: 'Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla.',
-      start: '8:00PM',
+      start: '8:00 PM',
       hours: 1,
       dayDelta: 2,
       color: 'canary'
@@ -141,7 +141,7 @@ const EVENTS = [
       id: 18,
       title: 'Multi-layered solution-oriented algorithm',
       description: 'Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat. Praesent blandit. Nam nulla.',
-      start: '8:00PM',
+      start: '8:00 PM',
       hours: 1,
       dayDelta: 2,
       color: 'canary'
@@ -165,7 +165,7 @@ const EVENTS = [
       id: 21,
       title: 'Open-architected bifurcated budgetary management',
       description: 'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl.',
-      start: '1:00PM',
+      start: '1:00 PM',
       hours: 1,
       dayDelta: 0,
       color: 'shamrock'
@@ -173,7 +173,7 @@ const EVENTS = [
       id: 22,
       title: 'Exclusive system-worthy extranet',
       description: 'Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh. In quis justo.',
-      start: '8:00PM',
+      start: '8:00 PM',
       hours: 1,
       dayDelta: -2,
       color: 'sky'
@@ -408,9 +408,9 @@ const _genData = () => (
     EVENTS.map(({id, title, description, start, hours, dayDelta, color}) => {
         let dateOnDay = new Date(Date.now() + (dayDelta * MILLISECONDS_DAY));
         let year = dateOnDay.getFullYear();
-        let month = dateOnDay.getMonth();
-        let day = dateOnDay.getDate();
-        let startDateTime = Date.parse(`${year}/${month}/${day} ${start}`);
+        let month = dateOnDay.getMonth() + 1;
+        let dayOfMonth = dateOnDay.getDate();
+        let startDateTime = Date.parse(`${year}/${month}/${dayOfMonth} ${start}`);
 
         return {
             id,

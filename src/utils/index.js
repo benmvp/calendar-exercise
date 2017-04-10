@@ -1,12 +1,24 @@
+const _MONTH_OF_YEAR_MAP = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+]
+const _DAY_OF_WEEK_MAP = [
+    'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+];
+const _HOUR_DISPLAY_MAP = [
+    '12AM', '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7AM', '8AM', '9AM', '10AM', '11AM',
+    '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM', '10PM', '11PM',
+]
+
 /**
  * Given a list of events and a date, filter the events down to those that
  * fall on the same day as the date
  * @param {array} events - List of event objects
- * @param {Date} date - The date to match
+ * @param {Date} timestamp - The timestamp representing the day to match
  * @returns {array}
  */
- // TODO: Implement date filtering!
-export const filterEventsByDay = (events, date) => (
+ // TODO: Implement day filtering!
+export const filterEventsByDay = (events, timestamp) => (
     events
 );
 
@@ -19,15 +31,22 @@ export const filterEventsByDay = (events, date) => (
  * @returns {array}
  */
 export const filterEventsByHour = (events, hour) => (
-    events.filter((event) => (
-        new Date(event.start)).getHours() === hour
+    events.filter(({start}) => (
+        new Date(start)).getHours() === hour
     )
 );
 
-const _HOUR_DISPLAY_MAP = [
-    '12AM', '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7AM', '8AM', '9AM', '10AM', '11AM',
-    '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM', '10PM', '11PM',
-]
+export const getDisplayDate = (timestamp) => {
+    let date = new Date(timestamp);
+    let dayOfMonth = date.getDate();
+    let year = date.getFullYear();
+    let month = date.getMonth();
+    let day = date.getDay();
+    let monthDisplay = _MONTH_OF_YEAR_MAP[month];
+    let dayDisplay = _DAY_OF_WEEK_MAP[day];
+
+    return `${dayDisplay}, ${monthDisplay} ${dayOfMonth}, ${year}`;
+};
 
 /**
  * Given an hour number, returns a display string version
