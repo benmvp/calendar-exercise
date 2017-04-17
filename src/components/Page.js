@@ -39,18 +39,28 @@ export default class Page extends PureComponent {
 
     _handleSelectEvent(selectedEventId) {
         this.setState({selectedEventId});
+        document.body.classList.add('stop-scrolling');
     }
 
     _handleEventDetailOverlayClose() {
         this.setState({selectedEventId: undefined});
+        document.body.classList.remove('stop-scrolling');
+
     }
 
     _handlePrev() {
         // TODO: Update this.state.day to go back 1 day so previous button works
+        this.setState({day: this._getNextDate(this.state.day, -1)});
     }
 
     _handleNext() {
         // TODO: Update this.state.day to go forward 1 day so next button works
+        this.setState({day: this._getNextDate(this.state.day, 1)});
+    }
+
+    _getNextDate(date, change) {
+      let currentDate = new Date(date);
+      return currentDate.setDate(currentDate.getDate() + change);
     }
 
     render() {
