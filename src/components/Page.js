@@ -1,8 +1,15 @@
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Route} from 'react-router-dom';
+import {setDay} from '../actions/actionCreators';
 import Calendar from './Calendar';
-import EventDetailOverlay from './EventDetailOverlay';
+import AddEventButton from './AddEventButton';
+import DetailOverlay from './DetailOverlay';
+import EventDetails from './EventDetails';
+import AddEventForm from './AddEventForm';
+import {MILLISECONDS_DAY} from '../utils/constants';
 import {filterEventsByDay, getEventFromEvents, getDisplayDate} from '../utils';
-import DATA_SET from '../utils/data';
 
 import './Page.css';
 
@@ -15,72 +22,78 @@ const DayNavigator = ({dateDisplay, onPrev, onNext}) => {
                 onClick={onPrev}
             />
             <h2 className="page__date">{dateDisplay}</h2>
-            <button
-                className="page__nav-button page__next-day"
-                title="Go to next day"
-                onClick={onNext}
-            />
+            <nav className="page__nav">
+                <button
+                    className="page__nav-button page__next-day"
+                    title="Go to next day"
+                    onClick={onNext}
+                />
+            </nav>
         </nav>
     );
 };
 
-export default class Page extends PureComponent {
-    state = {
-        // unfiltered list of events
-        events: DATA_SET,
+export class Page extends PureComponent {
 
-        // The currently selected day represented by numerical timestamp
-        day: Date.now(),
-
-        // The currently selected event in the agenda
-        // (mainly to trigger event detail overlay)
-        selectedEventId: undefined
-    }
-
-    _handleSelectEvent(selectedEventId) {
-        this.setState({selectedEventId});
-    }
-
-    _handleEventDetailOverlayClose() {
-        this.setState({selectedEventId: undefined});
+    static propTypes = {
+        day: PropTypes.number.isRequired,
+        events: PropTypes.arrayOf(PropTypes.object).isRequired,
+        dispatch: PropTypes.func.isRequired
     }
 
     _handlePrev() {
-        // TODO: Update this.state.day to go back 1 day so previous button works
+        this.props.dispatch(setDay(this.props.day - MILLISECONDS_DAY));
     }
 
     _handleNext() {
-        // TODO: Update this.state.day to go forward 1 day so next button works
+        this.props.dispatch(setDay(this.props.day + MILLISECONDS_DAY));
+    }
+
+    _eventDetailOverlayRenderHelper() {
+        return (
+            <Route path="/details/:id"
+                render={
+                    ({match}) => {
+                        const selectedEvent = getEventFromEvents(this.props.events, match.params.id);
+                        return <DetailOverlay content={<EventDetails event={selectedEvent} {...this.props} />} />
+                    }
+                }
+            />
+        )
+    }
+
+    _AddEventFormRenderHelper() {
+        return <Route path="/addEvent" render={() => <DetailOverlay content={<AddEventForm />} />} />
     }
 
     render() {
-        let {events, day, selectedEventId} = this.state;
+        let {events, day} = this.props;
         let filteredEvents = filterEventsByDay(events, day);
-        let selectedEvent = getEventFromEvents(events, selectedEventId);
-        let eventDetailOverlay;
-
-        if (selectedEvent) {
-            eventDetailOverlay = (
-                <EventDetailOverlay
-                    event={selectedEvent}
-                    onClose={this._handleEventDetailOverlayClose.bind(this)}
-                />
-            );
-        }
 
         return (
             <div className="page">
                 <header className="page__header">
                     <h1 className="page__title">Daily Agenda</h1>
+                    <span className="page__add-task-button">
+                        <AddEventButton />
+                    </span>
                 </header>
                 <DayNavigator
                     dateDisplay={getDisplayDate(day)}
                     onPrev={this._handlePrev.bind(this)}
                     onNext={this._handleNext.bind(this)}
                 />
-                <Calendar events={filteredEvents} onSelectEvent={this._handleSelectEvent.bind(this)} />
-                {eventDetailOverlay}
+                <Calendar events={filteredEvents} />
+                {this._eventDetailOverlayRenderHelper()}
+                {this._AddEventFormRenderHelper()}
             </div>
         );
     }
 }
+
+const mapStateToProps = state => ({
+    events: state.events,
+    day: state.day
+});
+
+export default connect(mapStateToProps)(Page);

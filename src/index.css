@@ -14,4 +14,38 @@ body {
     color: #212121;
     font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif;
     letter-spacing: 0.02em;
+    font-size: 1.5vh;
+}
+
+a:hover, a:visited, a:link, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+.sky {
+    background-color: #d1e8f0;
+    border-color: #307992;
+}
+.canary {
+    background-color: #fcf69a;
+    border-color: #938a04;
+}
+.rose {
+    background-color: #fcbbd2;
+    border-color: #b00843;
+}
+.shamrock {
+    background-color: #009e60;
+    border-color: #003800;
+}
+.gray {
+    background-color: #D3D3D3;
+    border-color: #a9a9a9;
+}
+
+.half-opacity {
+    opacity: 0.5;
+}
+.b-r-5 {
+    border-radius: 5px;
 }
