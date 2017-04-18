@@ -1,0 +1,47 @@
+/*
+ * TODO: page needs a gradient from white (top) to light gray (bottom)
+ * TODO: On narrow screens the background shouldn't scroll when detail overlay is shown
+ */
+
+.page {
+    margin: 1rem;
+}
+.page__header {
+    margin-bottom: 1rem;
+}
+
+.page__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.page__nav-button {
+    border: 0;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+.page__nav-button::-moz-focus-inner {
+    border: 0;
+}
+.page__nav-button::after {
+    font-size: 2rem;
+    font-weight: bold;
+}
+.page__nav-button:hover,
+.page__nav-button:focus,
+.page__nav-button:active {
+    outline: none;
+}
+.page__nav-button:hover::after,
+.page__nav-button:focus::after,
+.page__nav-button:active::after {
+    text-shadow: 0 0 0.25rem #51b1e0;
+}
+.page__prev-day::after {
+    content: '◀︎';
+}
+.page__next-day::after {
+    content: '▶︎';
+}
