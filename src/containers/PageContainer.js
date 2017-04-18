@@ -4,34 +4,12 @@ import { bindActionCreators } from 'redux';
 
 import { fetchEvents, selectEvent, selectDay } from '../actions/index';
 import {filterEventsByDay, getEventFromEvents, getDisplayDate} from '../utils';
-
 import Calendar from '../components/Calendar';
 import EventDetailOverlay from '../components/EventDetailOverlay';
-
+import DayNavigator from '../components/DayNavigator';
 import './PageContainer.css';
 
-const DayNavigator = ({dateDisplay, onPrev, onNext}) => {
-    return (
-        <nav className="page__nav">
-            <button
-                className="page__nav-button page__prev-day"
-                title="Go to previous day"
-                onClick={onPrev}
-            />
-            <h2 className="page__date">{dateDisplay}</h2>
-            <button
-                className="page__nav-button page__next-day"
-                title="Go to next day"
-                onClick={onNext}
-            />
-        </nav>
-    );
-};
-
 class PageContainer extends PureComponent {
-  // constructor(props) {
-  //   super(props);
-  // }
 
   componentDidMount() {
     this.props.fetchEvents();
@@ -45,7 +23,6 @@ class PageContainer extends PureComponent {
   _handleEventDetailOverlayClose() {
     this.props.selectEvent(undefined);
     document.body.classList.remove('stop-scrolling');
-
   }
 
   _handlePrev() {
