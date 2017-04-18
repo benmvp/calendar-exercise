@@ -14,6 +14,7 @@
      * which causes a double border
      */
 }
+
 .time-slot__hour-label {
     width: 4rem;
     text-align: right;
@@ -37,4 +38,9 @@
 
 @media screen and (min-width: 50rem) {
     /* Override styles for larger screens here */
+  .time-slot__events {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }

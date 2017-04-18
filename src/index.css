@@ -14,4 +14,10 @@ body {
     color: #212121;
     font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif;
     letter-spacing: 0.02em;
+    background: linear-gradient(#ffffff, #dedede);
+  }
+
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
 }

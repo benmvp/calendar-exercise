@@ -3,4 +3,9 @@
  */
 .calendar {
     border: 1px solid #666;
+    border-radius: 5px;
+}
+
+.calendar section:last-of-type {
+  border-bottom: none;
 }

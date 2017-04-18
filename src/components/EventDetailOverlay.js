@@ -23,7 +23,6 @@ export default class EventDetailOverlay extends PureComponent {
         let endHourDisplay = getDisplayHour(endHour);
 
         let displayDateTime = `${displayDate} ${startHourDisplay} - ${endHourDisplay}`
-
         // TODO: The event label color should match the event color
         // TODO: Add appropriate ARIA tags to overlay/dialog
         // TODO: Support clicking outside of the overlay to close it
@@ -39,7 +38,7 @@ export default class EventDetailOverlay extends PureComponent {
                     <div>
                         {displayDateTime}
                         <span
-                            className="event-detail-overlay__color"
+                            className={`event-detail-overlay__color time-slot-event--${color}`}
                             title={`Event label color: ${color}`}
                         />
                     </div>

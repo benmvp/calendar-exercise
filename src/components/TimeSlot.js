@@ -14,7 +14,6 @@ export default class TimeSlot extends PureComponent {
 
     _renderEvents() {
         let {events, onSelectEvent} = this.props;
-
         return events.map((event) => (
             <div key={event.id} className="time-slot__event">
                 <TimeSlotEvent event={event} onSelect={onSelectEvent.bind(null, event.id)} />
