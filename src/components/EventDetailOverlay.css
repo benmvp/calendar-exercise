@@ -32,6 +32,7 @@
     padding: 1rem;
     background-color: #fff;
     overflow: auto;
+    border-radius: 20px;
 }
 
 .event-detail-overlay__close {
@@ -73,5 +74,17 @@
      * TODO: Figure out how label color can match the event color instead of
      * always being black
      */
-    background-color: #000;
+}
+
+.square--sky {
+  background-color: #d1e8f0;
+}
+.square--rose {
+  background-color: #fcbbd2;
+}
+.square--canary {
+  background-color: #fcf69a;
+}
+.square--shamrock {
+  background-color: #009e60
 }
