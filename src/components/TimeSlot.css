@@ -14,12 +14,14 @@
      * which causes a double border
      */
 }
+.time-slot:last-child {
+  border-bottom: 0;
+}
 .time-slot__hour-label {
     width: 4rem;
     text-align: right;
     border-right: 1px solid #666;
     padding: 0.5rem;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,6 +33,7 @@
     overflow: hidden;
 }
 .time-slot__event {
+    width: 100%;
     margin: 0.5rem;
     max-width: 100%;
 }
