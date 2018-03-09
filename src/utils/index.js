@@ -40,7 +40,7 @@ export const getDisplayDate = (timestamp) => {
 
     // TODO: Format the date like: "Tuesday, April 11, 2017"
 
-    return date.toString();
+    return date.toDateString();
 };
 
 /**
