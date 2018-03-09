@@ -10,6 +10,7 @@ export default class EventDetailOverlay extends PureComponent {
         onClose: PropTypes.func.isRequired
     }
 
+
     render() {
         let {event, onClose} = this.props;
         let {title, description, start, color, hours} = event;
@@ -17,17 +18,16 @@ export default class EventDetailOverlay extends PureComponent {
         let startHour = (new Date(start)).getHours();
 
         // TODO: Fix. If hours was other than 1 the UI would break
-        let endHour = startHour + hours;
+        let endHour = startHour += hours;
 
         let startHourDisplay = getDisplayHour(startHour);
         let endHourDisplay = getDisplayHour(endHour);
 
+
         let displayDateTime = `${displayDate} ${startHourDisplay} - ${endHourDisplay}`;
 
-        // TODO: The event label color should match the event color
-        // TODO: Add appropriate ARIA tags to overlay/dialog
-        // TODO: Support clicking outside of the overlay to close it
-        // TODO: Support clicking ESC to close it
+
+
         return (
             <section className="event-detail-overlay">
                 <div className="event-detail-overlay__container">
@@ -35,12 +35,16 @@ export default class EventDetailOverlay extends PureComponent {
                         className="event-detail-overlay__close"
                         title="Close detail view"
                         onClick={onClose}
+                        onKeyPress={(e: KeyboardEvent<HTMLDivElement>) => console.log(e.key)}
                     />
                     <div>
                         {displayDateTime}
                         <span
-                            className="event-detail-overlay__color"
+                            className={`event-detail-overlay__color square--${color}`}
                             title={`Event label color: ${color}`}
+// tried adding hexcode values to constants, but cannot render in JSX. Leaving for later (or, is this possible?)
+// renders string of color, but not attempt at adding hexcode
+                            // style={{ backgroundColor: `${color}` }}
                         />
                     </div>
                     <h1 className="event-detail-overlay__title">
