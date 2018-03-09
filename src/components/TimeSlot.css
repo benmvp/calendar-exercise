@@ -29,8 +29,8 @@
 .time-slot__events {
     padding: 0.5rem;
     flex: 1;
-
-    overflow: hidden;
+    display: flex;
+    overflow: scroll;
 }
 .time-slot__event {
     width: 100%;
