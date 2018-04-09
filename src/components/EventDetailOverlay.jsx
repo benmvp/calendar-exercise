@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {EVENT_PROP_TYPE} from './constants';
 import {getDisplayDate, getDisplayHour} from '../utils';
 
+
 import './EventDetailOverlay.css';
 
 export default class EventDetailOverlay extends React.PureComponent {

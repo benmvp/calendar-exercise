@@ -5,7 +5,6 @@ const _HOUR_DISPLAY_MAP = [
 
 
 export const filterEventsByDay = (events, timestamp) => {
-  console.log(events);
   let today = new Date(timestamp).toString();
   today = today.slice(0, 15);
 

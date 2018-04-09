@@ -5,6 +5,7 @@ import {filterEventsByDay, getEventFromEvents, getDisplayDate} from '../utils';
 import DATA_SET from '../utils/data';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {handlePrev, handleNext} from '../actions/index'
 
 import './Page.css';
 
@@ -28,6 +29,8 @@ const DayNavigator = ({dateDisplay, onPrev, onNext}) => {
 
 
 class Page extends React.PureComponent {
+  // redux refactor - state in store
+
   // state = {
   //   // unfiltered list of events
   //   events: DATA_SET,
@@ -40,39 +43,40 @@ class Page extends React.PureComponent {
   //   selectedEventId: undefined
   // }
 
-
-
   componentDidMount() {
     console.log('paggeeee', this.props);
   }
 
-
-
   _handleSelectEvent(selectedEventId) {
+    console.log('bugggg')
     this.setState({selectedEventId});
   }
+
+
 
   _handleEventDetailOverlayClose() {
     this.setState({selectedEventId: undefined});
   }
 
 
-  // fixed but later on make page handlers into 1 func, take in (prev,next) as params
-  _handlePrev() {
-    this.setState((prevState) => {
-      return {
-        day: prevState.day - (86400000) // - 1 day
-      }
-    })
-  }
 
-  _handleNext() {
-    this.setState((prevState) => {
-      return {
-        day: prevState.day + (86400000) // + 1 day
-      }
-    })
-  }
+  // redux refactor - now in actions
+
+  // _handlePrev() {
+  //   this.setState((prevState) => {
+  //     return {
+  //       day: prevState.day - (86400000) // - 1 day
+  //     }
+  //   })
+  // }
+
+  // _handleNext() {
+  //   this.setState((prevState) => {
+  //     return {
+  //       day: prevState.day + (86400000) // + 1 day
+  //     }
+  //   })
+  // }
 
   render() {
     let {events, day, selectedEventId} = this.props;
@@ -96,8 +100,8 @@ class Page extends React.PureComponent {
         </header>
         <DayNavigator
             dateDisplay={getDisplayDate(day)}
-            onPrev={this._handlePrev.bind(this)}
-            onNext={this._handleNext.bind(this)}
+            onPrev={this.props.handlePrev}
+            onNext={this.props.handleNext}
         />
         <Calendar events={filteredEvents} onSelectEvent={this._handleSelectEvent.bind(this)} />
         {eventDetailOverlay}
@@ -114,5 +118,9 @@ var mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Page);
+var mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({handlePrev: handlePrev, handleNext: handleNext}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Page);
 

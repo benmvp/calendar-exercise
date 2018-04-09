@@ -2,6 +2,8 @@ import React, {PropTypes} from 'react';
 import {EVENT_PROP_TYPE} from './constants';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {getEventFromEvents} from '../utils';
+import handleSelectEvent from '../actions/index';
 
 
 import './TimeSlotEvent.css';
@@ -31,10 +33,16 @@ class TimeSlotEvent extends React.PureComponent {
 
 var mapStateToProps = (state) => {
   return {
-    events: state.events
+    selectedEventId: state.selectedEventId
   }
+}
+
+var mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({handleSelectEvent: handleSelectEvent}, dispatch)
 }
 
 
 
-export default connect(mapStateToProps)(TimeSlotEvent);
+export default connect(mapStateToProps, mapDispatchToProps)(TimeSlotEvent);
+
+
