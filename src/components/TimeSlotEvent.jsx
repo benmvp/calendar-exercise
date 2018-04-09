@@ -1,9 +1,12 @@
 import React, {PropTypes} from 'react';
 import {EVENT_PROP_TYPE} from './constants';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
 
 import './TimeSlotEvent.css';
 
-export default class TimeSlotEvent extends React.PureComponent {
+class TimeSlotEvent extends React.PureComponent {
   static propTypes = {
     event: EVENT_PROP_TYPE.isRequired,
     onSelect: PropTypes.func.isRequired,
@@ -25,3 +28,13 @@ export default class TimeSlotEvent extends React.PureComponent {
     );
   }
 }
+
+var mapStateToProps = (state) => {
+  return {
+    events: state.events
+  }
+}
+
+
+
+export default connect(mapStateToProps)(TimeSlotEvent);

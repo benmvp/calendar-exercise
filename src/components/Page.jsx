@@ -3,6 +3,8 @@ import Calendar from './Calendar.jsx';
 import EventDetailOverlay from './EventDetailOverlay.jsx';
 import {filterEventsByDay, getEventFromEvents, getDisplayDate} from '../utils';
 import DATA_SET from '../utils/data';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
 import './Page.css';
 
@@ -24,18 +26,27 @@ const DayNavigator = ({dateDisplay, onPrev, onNext}) => {
   );
 };
 
-export default class Page extends React.PureComponent {
-  state = {
-    // unfiltered list of events
-    events: DATA_SET,
 
-    // The currently selected day represented by numerical timestamp
-    day: Date.now(),
+class Page extends React.PureComponent {
+  // state = {
+  //   // unfiltered list of events
+  //   events: DATA_SET,
 
-    // The currently selected event in the agenda
-    // (mainly to trigger event detail overlay)
-    selectedEventId: undefined
+  //   // The currently selected day represented by numerical timestamp
+  //   day: Date.now(),
+
+  //   // The currently selected event in the agenda
+  //   // (mainly to trigger event detail overlay)
+  //   selectedEventId: undefined
+  // }
+
+
+
+  componentDidMount() {
+    console.log('paggeeee', this.props);
   }
+
+
 
   _handleSelectEvent(selectedEventId) {
     this.setState({selectedEventId});
@@ -64,7 +75,7 @@ export default class Page extends React.PureComponent {
   }
 
   render() {
-    let {events, day, selectedEventId} = this.state;
+    let {events, day, selectedEventId} = this.props;
     let filteredEvents = filterEventsByDay(events, day);
     let selectedEvent = getEventFromEvents(events, selectedEventId);
     let eventDetailOverlay;
@@ -94,3 +105,14 @@ export default class Page extends React.PureComponent {
     );
   }
 }
+
+var mapStateToProps = (state) => {
+  return {
+    events: state.events,
+    day: state.day,
+    selectedEventId: state.selectedEventId
+  }
+}
+
+export default connect(mapStateToProps)(Page);
+

@@ -3,10 +3,12 @@ import {filterEventsByHour} from '../utils';
 import {HOURS_DAY} from '../utils/constants';
 import {EVENTS_PROP_TYPE} from './constants';
 import TimeSlot from './TimeSlot.jsx';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
 import './Calendar.css';
 
-export default class Calendar extends React.PureComponent {
+class Calendar extends React.PureComponent {
   static propTypes = {
     events: EVENTS_PROP_TYPE.isRequired,
     onSelectEvent: PropTypes.func.isRequired,
@@ -40,3 +42,12 @@ export default class Calendar extends React.PureComponent {
     );
   }
 }
+
+var mapStateToProps = (state) => {
+  return {
+    day: state.day
+  }
+}
+
+
+export default Calendar;

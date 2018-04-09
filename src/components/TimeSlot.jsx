@@ -2,10 +2,12 @@ import React, {PropTypes} from 'react';
 import {EVENTS_PROP_TYPE} from './constants';
 import {getDisplayHour} from '../utils';
 import TimeSlotEvent from './TimeSlotEvent.jsx';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
 import './TimeSlot.css';
 
-export default class TimeSlot extends React.PureComponent {
+class TimeSlot extends React.PureComponent {
   static propTypes = {
     hour: PropTypes.number.isRequired,
     events: EVENTS_PROP_TYPE.isRequired,
@@ -38,3 +40,13 @@ export default class TimeSlot extends React.PureComponent {
     );
   }
 }
+
+var mapStateToProps = (state) => {
+  return {
+    day: state.day
+  }
+}
+
+
+
+export default connect(mapStateToProps)(TimeSlot);
