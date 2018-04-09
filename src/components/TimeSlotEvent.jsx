@@ -1,4 +1,4 @@
-import React, {PureComponent, PropTypes} from 'react';
+import React, {PropTypes} from 'react';
 import {EVENT_PROP_TYPE} from './constants';
 
 import './TimeSlotEvent.css';

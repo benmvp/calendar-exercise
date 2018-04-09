@@ -1,8 +1,8 @@
-import React, {PureComponent, PropTypes} from 'react';
+import React, {PropTypes} from 'react';
 import {filterEventsByHour} from '../utils';
 import {HOURS_DAY} from '../utils/constants';
 import {EVENTS_PROP_TYPE} from './constants';
-import TimeSlot from './TimeSlot';
+import TimeSlot from './TimeSlot.jsx';
 
 import './Calendar.css';
 

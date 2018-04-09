@@ -33,6 +33,7 @@
 .time-slot__event {
     margin: 0.5rem;
     max-width: 100%;
+
 }
 
 @media screen and (min-width: 50rem) {

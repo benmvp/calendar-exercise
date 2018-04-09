@@ -1,10 +1,10 @@
-import React, {PureComponent} from 'react';
-import Page from './Page';
+import React from 'react';
+import Page from './Page.jsx';
 
 export default class App extends React.PureComponent {
-    render() {
-      return(
-        return (<Page />);
-      );
-    }
+  render() {
+    return(
+      <Page />
+    );
+  }
 };
