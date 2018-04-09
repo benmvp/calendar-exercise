@@ -12,7 +12,6 @@ export const handleSelectEvent = (selectedEventId) => (dispatch, getState) => {
 // refactor to 1 function, takes in a param to say prev or next
 
 export const handlePrev = () => (dispatch, getState) => {
-  console.log('in action!!!!!!!!!!!!!!!!');
   return dispatch({
     type: 'UPDATE_DAY',
     payload: (store.getState().day - 86400000)
@@ -20,7 +19,6 @@ export const handlePrev = () => (dispatch, getState) => {
 };
 
 export const handleNext = () => (dispatch, getState) => {
-  console.log('in action!!!!!!!!!!!!!!!!');
   return dispatch({
     type: 'UPDATE_DAY',
     payload: (store.getState().day + 86400000)

@@ -48,7 +48,7 @@ class Page extends React.PureComponent {
   }
 
   _handleSelectEvent(selectedEventId) {
-    console.log('bugggg')
+    console.log('redux bugggg')
     this.setState({selectedEventId});
   }
 
