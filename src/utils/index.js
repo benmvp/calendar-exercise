@@ -5,6 +5,7 @@ const _HOUR_DISPLAY_MAP = [
 
 
 export const filterEventsByDay = (events, timestamp) => {
+  console.log(events);
   let today = new Date(timestamp).toString();
   today = today.slice(0, 15);
 
@@ -37,12 +38,21 @@ export const filterEventsByHour = (events, hour) => (
  * @returns {string} The formatted date
  */
 export const getDisplayDate = (timestamp) => {
-  let date = new Date(timestamp);
-  // add full name of day of week later
+  let date = new Date(timestamp).toString();
+  let dayOfWeek = date.slice(0,3);
+  let middle = 'day, ';
+  let monthAndDay = date.slice(4, 10);
+  let year = date.slice(11, 16);
+  if (dayOfWeek === 'Tue') {
+    middle = 's' + middle;
+  } else if (dayOfWeek === 'Wed') {
+    middle = 'nes' + middle;
+  } else if (dayOfWeek === 'Thu') {
+    middle = 'rs' + middle;
+  }
 
-  date = date.toString().slice(0,16);
+  return dayOfWeek + middle + monthAndDay + ', '+ year
 
-  return date;
 };
 
 /**
@@ -50,8 +60,17 @@ export const getDisplayDate = (timestamp) => {
  * @param {number} hour - The hour
  * @returns {string}
  */
-// TODO: Implement using a more programmatic approach instead of map
-export const getDisplayHour = (hour) => _HOUR_DISPLAY_MAP[hour]
+export const getDisplayHour = (hour) => {
+  let suffix = 'AM';
+  if (hour === 0) {
+    hour = 12;
+  } else if (hour > 12) {
+    hour -= 12;
+    suffix = 'PM'
+  }
+  return hour + suffix;
+
+}
 
 /**
  * Given a list of events, returns the event object whose id matches the specified eventId
