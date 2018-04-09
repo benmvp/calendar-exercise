@@ -45,12 +45,12 @@ export default class Page extends React.PureComponent {
     this.setState({selectedEventId: undefined});
   }
 
+
+  // fixed but later on make page handlers into 1 func, take in (prev,next) as params
   _handlePrev() {
-    // change events too, look at fake data
     this.setState((prevState) => {
-      console.log(prevState)
       return {
-        day: prevState.day - (24*60*60*1000)
+        day: prevState.day - (86400000) // - 1 day
       }
     })
   }
@@ -58,7 +58,7 @@ export default class Page extends React.PureComponent {
   _handleNext() {
     this.setState((prevState) => {
       return {
-        day: prevState.day + (24*60*60*1000)
+        day: prevState.day + (86400000) // + 1 day
       }
     })
   }

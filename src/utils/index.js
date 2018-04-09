@@ -3,17 +3,18 @@ const _HOUR_DISPLAY_MAP = [
     '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM', '10PM', '11PM',
 ]
 
-/**
- * Given a list of events and a date, filter the events down to those that
- * fall on the same day as the date
- * @param {array} events - List of event objects
- * @param {Date} timestamp - The timestamp representing the day to match
- * @returns {array}
- */
-export const filterEventsByDay = (events, timestamp) => {
-    // TODO: Implement day filtering!
 
-    return events;
+export const filterEventsByDay = (events, timestamp) => {
+  let today = new Date(timestamp).toString();
+  today = today.slice(0, 15);
+
+  return events.filter((event) => {
+    let current = new Date(event.start).toString().slice(0, 15);
+    if (today === current) {
+      return event;
+    }
+  })
+
 }
 
 /**
@@ -25,9 +26,9 @@ export const filterEventsByDay = (events, timestamp) => {
  * @returns {array}
  */
 export const filterEventsByHour = (events, hour) => (
-    events.filter(({start}) => (
-        new Date(start)).getHours() === hour
-    )
+  events.filter(({start}) => (
+    new Date(start)).getHours() === hour
+  )
 );
 
 /**
@@ -36,11 +37,12 @@ export const filterEventsByHour = (events, hour) => (
  * @returns {string} The formatted date
  */
 export const getDisplayDate = (timestamp) => {
-    let date = new Date(timestamp);
+  let date = new Date(timestamp);
+  // add full name of day of week later
 
-    // TODO: Format the date like: "Tuesday, April 11, 2017"
+  date = date.toString().slice(0,16);
 
-    return date.toString();
+  return date;
 };
 
 /**
@@ -58,5 +60,5 @@ export const getDisplayHour = (hour) => _HOUR_DISPLAY_MAP[hour]
  * @returns {object}
  */
 export const getEventFromEvents = (events, eventId) => (
-    events.find(({id}) => id === eventId)
+  events.find(({id}) => id === eventId)
 );
