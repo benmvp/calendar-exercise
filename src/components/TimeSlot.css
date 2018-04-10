@@ -8,12 +8,12 @@
     border-bottom: 1px solid #666;
     min-height: 3rem;
     box-sizing: border-box;
-
-    /**
-     * TODO: Figure out how not to have a bottom border on the last time-slot
-     * which causes a double border
-     */
 }
+
+.time-slot:last-child {
+  border-bottom: none;
+}
+
 .time-slot__hour-label {
     width: 4rem;
     text-align: right;
@@ -27,14 +27,20 @@
 .time-slot__events {
     padding: 0.5rem;
     flex: 1;
-
     overflow: hidden;
 }
 .time-slot__event {
     margin: 0.5rem;
-    max-width: 100%;
+    width: 100%;
 }
 
 @media screen and (min-width: 50rem) {
     /* Override styles for larger screens here */
+/*    .time-slot-event {
+      display: flex;
+      flex-wrap: wrap;*/
+/*      flex-direction: column;*/
+    /*  align-content: space-between;*/
+/*    }*/
+
 }

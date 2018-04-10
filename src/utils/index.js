@@ -3,17 +3,18 @@ const _HOUR_DISPLAY_MAP = [
     '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM', '10PM', '11PM',
 ]
 
-/**
- * Given a list of events and a date, filter the events down to those that
- * fall on the same day as the date
- * @param {array} events - List of event objects
- * @param {Date} timestamp - The timestamp representing the day to match
- * @returns {array}
- */
-export const filterEventsByDay = (events, timestamp) => {
-    // TODO: Implement day filtering!
 
-    return events;
+export const filterEventsByDay = (events, timestamp) => {
+  let today = new Date(timestamp).toString();
+  today = today.slice(0, 15);
+
+  return events.filter((event) => {
+    let current = new Date(event.start).toString().slice(0, 15);
+    if (today === current) {
+      return event;
+    }
+  })
+
 }
 
 /**
@@ -25,9 +26,9 @@ export const filterEventsByDay = (events, timestamp) => {
  * @returns {array}
  */
 export const filterEventsByHour = (events, hour) => (
-    events.filter(({start}) => (
-        new Date(start)).getHours() === hour
-    )
+  events.filter(({start}) => (
+    new Date(start)).getHours() === hour
+  )
 );
 
 /**
@@ -36,11 +37,21 @@ export const filterEventsByHour = (events, hour) => (
  * @returns {string} The formatted date
  */
 export const getDisplayDate = (timestamp) => {
-    let date = new Date(timestamp);
+  let date = new Date(timestamp).toString();
+  let dayOfWeek = date.slice(0,3);
+  let middle = 'day, ';
+  let monthAndDay = date.slice(4, 10);
+  let year = date.slice(11, 16);
+  if (dayOfWeek === 'Tue') {
+    middle = 's' + middle;
+  } else if (dayOfWeek === 'Wed') {
+    middle = 'nes' + middle;
+  } else if (dayOfWeek === 'Thu') {
+    middle = 'rs' + middle;
+  }
 
-    // TODO: Format the date like: "Tuesday, April 11, 2017"
+  return dayOfWeek + middle + monthAndDay + ', '+ year
 
-    return date.toString();
 };
 
 /**
@@ -48,8 +59,17 @@ export const getDisplayDate = (timestamp) => {
  * @param {number} hour - The hour
  * @returns {string}
  */
-// TODO: Implement using a more programmatic approach instead of map
-export const getDisplayHour = (hour) => _HOUR_DISPLAY_MAP[hour]
+export const getDisplayHour = (hour) => {
+  let suffix = 'AM';
+  if (hour === 0) {
+    hour = 12;
+  } else if (hour > 12) {
+    hour -= 12;
+    suffix = 'PM'
+  }
+  return hour + suffix;
+
+}
 
 /**
  * Given a list of events, returns the event object whose id matches the specified eventId
@@ -58,5 +78,5 @@ export const getDisplayHour = (hour) => _HOUR_DISPLAY_MAP[hour]
  * @returns {object}
  */
 export const getEventFromEvents = (events, eventId) => (
-    events.find(({id}) => id === eventId)
+  events.find(({id}) => id === eventId)
 );
