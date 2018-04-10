@@ -3,7 +3,6 @@ import {EVENT_PROP_TYPE} from './constants';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {getEventFromEvents} from '../utils';
-import handleSelectEvent from '../actions/index';
 
 
 import './TimeSlotEvent.css';
@@ -11,7 +10,7 @@ import './TimeSlotEvent.css';
 class TimeSlotEvent extends React.PureComponent {
   static propTypes = {
     event: EVENT_PROP_TYPE.isRequired,
-    onSelect: PropTypes.func.isRequired,
+    // onSelect: PropTypes.func.isRequired,
   }
 
   render() {
@@ -21,10 +20,12 @@ class TimeSlotEvent extends React.PureComponent {
     } = this.props;
 
     // TODO: Need a way to determine that the event is in the past so that it
+      // convert current time date.now to hour of the day
+      //  for every child div before that hour - fade
     // can be displayed faded-out
 
     return (
-      <button className={`time-slot-event time-slot-event--${color}`} onClick={onSelect}>
+      <button className={`time-slot-event time-slot-event--${color}`} onClick={this.props.onSelect}>
           {title}
       </button>
     );
@@ -37,12 +38,7 @@ var mapStateToProps = (state) => {
   }
 }
 
-var mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({handleSelectEvent: handleSelectEvent}, dispatch)
-}
 
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(TimeSlotEvent);
+export default connect(mapStateToProps)(TimeSlotEvent);
 
 

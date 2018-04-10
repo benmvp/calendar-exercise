@@ -11,7 +11,7 @@ import thunk from 'redux-thunk';
 const store = createStore(allReducers, applyMiddleware(thunk));
 
 store.subscribe( () => {
-  console.log( '----- STORE CHANGED!-----', store.getState());
+  console.log( '----- STORE CHANGED-----', store.getState());
 })
 
 ReactDOM.render(

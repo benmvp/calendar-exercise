@@ -4,15 +4,15 @@ import {getDisplayHour} from '../utils';
 import TimeSlotEvent from './TimeSlotEvent.jsx';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import handleSelectEvent from '../actions/index';
+import {handleSelectEventId} from '../actions/index';
 
 import './TimeSlot.css';
 
 class TimeSlot extends React.PureComponent {
   static propTypes = {
     hour: PropTypes.number.isRequired,
-    events: EVENTS_PROP_TYPE.isRequired,
-    onSelectEvent: PropTypes.func.isRequired,
+    // events: EVENTS_PROP_TYPE.isRequired,
+    // onSelectEvent: PropTypes.func.isRequired,
   }
 
   _renderEvents =() => {
@@ -20,9 +20,10 @@ class TimeSlot extends React.PureComponent {
     // let events = this.props.events;
     // let onSelectEvent = this.props.handleSelectEvent;
 
+    // filtered events
     return events.map((event) => (
       <div key={event.id} className="time-slot__event">
-        <TimeSlotEvent event={event} onSelect={onSelectEvent.bind(null, event.id)} />
+        <TimeSlotEvent event={event} onSelect={handleSelectEventId.bind(null, event.id)} />
       </div>
     ));
   }
@@ -46,12 +47,13 @@ class TimeSlot extends React.PureComponent {
 
 var mapStateToProps = (state) => {
   return {
-    day: state.day
+    day: state.day,
+    selectedEventId: state.selectedEventId
   }
 }
 
 var mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({handleSelectEvent: handleSelectEvent}, dispatch);
+  return bindActionCreators({handleSelectEventI: handleSelectEventId}, dispatch);
 }
 
 

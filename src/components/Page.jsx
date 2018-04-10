@@ -53,7 +53,6 @@ class Page extends React.PureComponent {
   }
 
 
-
   _handleEventDetailOverlayClose() {
     this.setState({selectedEventId: undefined});
   }

@@ -1,13 +1,13 @@
 import store from '../index.js'
 
-export const handleSelectEvent = (selectedEventId) => (dispatch, getState) => {
-  console.log('------------ testing');
+
+export const handleSelectEventId = (selectedEventId) => (dispatch, getState) => {
+  console.log('testing--', selectedEventId)
   return dispatch({
     type: 'SELECT_EVENT_ID',
     payload: selectedEventId
   });
 };
-
 
 // refactor to 1 function, takes in a param to say prev or next
 

@@ -3,8 +3,6 @@ import {filterEventsByHour} from '../utils';
 import {HOURS_DAY} from '../utils/constants';
 import {EVENTS_PROP_TYPE} from './constants';
 import TimeSlot from './TimeSlot.jsx';
-// import {bindActionCreators} from 'redux';
-// import {connect} from 'react-redux';
 
 import './Calendar.css';
 
