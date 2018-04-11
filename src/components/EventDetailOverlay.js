@@ -7,7 +7,7 @@ import './EventDetailOverlay.css';
 export default class EventDetailOverlay extends PureComponent {
     static propTypes = {
         event: EVENT_PROP_TYPE.isRequired,
-        onClose: PropTypes.func.isRequired
+        onClose: PropTypes.func.isRequired,
     }
 
     render() {
