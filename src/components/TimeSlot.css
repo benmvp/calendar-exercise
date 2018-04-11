@@ -34,5 +34,12 @@
 }
 
 @media screen and (min-width: 50rem) {
-    /* Override styles for larger screens here */
+    .time-slot__events {
+      display: flex;
+      flex-direction: row;
+    }
+    .time-slot__event {
+      overflow: hidden;
+      flex: 1 1 auto;
+    }
 }
