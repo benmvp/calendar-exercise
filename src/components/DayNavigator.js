@@ -1,10 +1,11 @@
 import React from 'react';
-import {filterEventsByDay, getEventFromEvents, getDisplayDate} from '../utils';
+import PropTypes from 'prop-types';
+import {getDisplayDate} from '../utils';
 import {connect} from 'react-redux';
-import {getEvents, updateDate} from '../actions';
+import {updateDate} from '../actions';
 const moment = require('moment');
 
-const DayNavigator = ({ day, getDay }) => {
+let DayNavigator = ({ day, getDay }) => {
     return (
         <nav className="page__nav">
             <button
@@ -26,6 +27,11 @@ const DayNavigator = ({ day, getDay }) => {
             />
         </nav>
     );
+};
+
+DayNavigator.propTypes = {
+    day: PropTypes.string.isRequired,
+    getDay: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
