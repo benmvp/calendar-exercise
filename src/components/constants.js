@@ -1,7 +1,10 @@
 import {PropTypes} from 'react';
 
 export const EVENT_PROP_TYPE = PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     start: PropTypes.number.isRequired,

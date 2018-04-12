@@ -5,6 +5,7 @@ import DayNavigator from './DayNavigator';
 import EventDetailOverlay from './EventDetailOverlay';
 import {getEvents, updateDate} from '../actions';
 import {filterEventsByDay, getEventFromEvents} from '../utils';
+import NewEvent from './NewEvent';
 import DATA_SET from '../utils/data';
 
 import './Page.css';
@@ -34,6 +35,7 @@ class Page extends PureComponent {
             <div className="page">
                 <header className="page__header">
                     <h1 className="page__title">Daily Agenda</h1>
+                    <NewEvent />
                 </header>
                 <DayNavigator />
                 <Calendar events={filteredEvents} />

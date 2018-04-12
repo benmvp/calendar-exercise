@@ -1,3 +1,4 @@
+const uuid = require('uuid/v4');
 /**
  * @return {object} An action object with a type of GET_EVENTS
  */
@@ -22,3 +23,23 @@ export const selectEvent = (id) => ({
     id,
 });
 
+/**
+ * @return {object} An action object with a type of CHANGE_*
+ */
+export const changeInput = (name, value) => ({
+    type: `CHANGE_${name.toUpperCase()}`,
+    [name]: value,
+});
+
+/**
+ * @return {object} An action object with a type of ADD_EVENT
+ */
+export const addEvent = (title, description, start) => ({
+    type: 'ADD_EVENT',
+    id: uuid(),
+    title,
+    description,
+    start,
+    hours: 1,
+    color: 'sky',
+});
