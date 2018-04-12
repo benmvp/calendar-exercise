@@ -1,17 +1,42 @@
 import React, {PureComponent, PropTypes} from 'react';
-import {EVENT_PROP_TYPE} from './constants';
-import {getDisplayDate, getDisplayHour} from '../utils';
+import {connect} from 'react-redux';
+import {selectEvent} from '../actions';
+import {getDisplayDate, getDisplayHour, getEventFromEvents} from '../utils';
+import {EVENTS_PROP_TYPE} from './constants';
 
 import './EventDetailOverlay.css';
 
-export default class EventDetailOverlay extends PureComponent {
+class EventDetailOverlay extends PureComponent {
     static propTypes = {
-        event: EVENT_PROP_TYPE.isRequired,
-        onClose: PropTypes.func.isRequired
+        events: EVENTS_PROP_TYPE.isRequired,
+        selectedEventId: PropTypes.oneOfType([
+            PropTypes.number,
+            PropTypes.string,
+        ]),
+        _handleClose: PropTypes.func.isRequired,
     }
 
+    componentDidMount() {
+        document.addEventListener('keydown', this._handleEsc);
+        document.getElementById('calendar').addEventListener('click', this.props._handleClose);
+        document.body.style.overflow = 'hidden';
+    }
+      
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.onEsc);
+        document.getElementById('calendar').removeEventListener('click', this.props.onClose);
+        document.body.style.overflow = 'auto';
+    }
+
+    _handleEsc = (e) => {
+        if (e.keyCode === 27) {
+            this.props._handleClose();
+        }
+    }
+    
     render() {
-        let {event, onClose} = this.props;
+        let {events, selectedEventId, _handleClose} = this.props;
+        let event = getEventFromEvents(events, selectedEventId);
         let {title, description, start, color, hours} = event;
         let displayDate = getDisplayDate(start);
         let startHour = (new Date(start)).getHours();
@@ -24,22 +49,22 @@ export default class EventDetailOverlay extends PureComponent {
 
         let displayDateTime = `${displayDate} ${startHourDisplay} - ${endHourDisplay}`;
 
-        // TODO: The event label color should match the event color
         // TODO: Add appropriate ARIA tags to overlay/dialog
-        // TODO: Support clicking outside of the overlay to close it
-        // TODO: Support clicking ESC to close it
         return (
             <section className="event-detail-overlay">
                 <div className="event-detail-overlay__container">
                     <button
                         className="event-detail-overlay__close"
                         title="Close detail view"
-                        onClick={onClose}
+                        onClick={_handleClose}
                     />
                     <div>
                         {displayDateTime}
                         <span
-                            className="event-detail-overlay__color"
+                            className={
+                                `event-detail-overlay__color 
+                                event-detail-overlay__${color}`
+                            }
                             title={`Event label color: ${color}`}
                         />
                     </div>
@@ -52,3 +77,18 @@ export default class EventDetailOverlay extends PureComponent {
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    events: state.home.events,
+    selectedEventId: state.home.selectedEventId,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    _handleClose: () => {
+        dispatch(selectEvent(null));
+    },
+});
+
+EventDetailOverlay = connect(mapStateToProps, mapDispatchToProps)(EventDetailOverlay);
+
+export default EventDetailOverlay;

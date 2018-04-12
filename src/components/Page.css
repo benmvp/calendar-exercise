@@ -1,5 +1,4 @@
 /*
- * TODO: page needs a gradient from white (top) to light gray (bottom)
  * TODO: On narrow screens the background shouldn't scroll when detail overlay is shown
  */
 
@@ -7,7 +6,9 @@
     margin: 1rem;
 }
 .page__header {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 .page__nav {
