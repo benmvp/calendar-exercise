@@ -3,7 +3,7 @@ import Button from 'material-ui/Button';
 import Dialog, {
   DialogActions,
   DialogContent,
-  DialogTitle,
+  DialogTitle
 } from 'material-ui/Dialog';
 import NewEventForm from './NewEventForm';
 import AddIcon from '@material-ui/icons/Add';
@@ -24,19 +24,20 @@ class NewEvent extends PureComponent {
     };
 
     _handleClickOpen = () => {
-        this.setState({ open: true });
+        this.setState({open: true});
     };
     
     _handleClose = () => {
-        this.setState({ open: false });
+        this.setState({open: false});
     };
 
     render() {
         let {title, description, date, start, _handleSubmitForm} = this.props;
+
         return (
             <div className="new-event">
                 <Button 
-                    mini color="secondary" 
+                    mini={true} color="secondary" 
                     variant="fab" 
                     onClick={this._handleClickOpen}
                 >
@@ -56,7 +57,8 @@ class NewEvent extends PureComponent {
                                 _handleSubmitForm(title, description, date, start);
                                 this._handleClose();
                             }} 
-                            color="primary">
+                            color="primary"
+                        >
                             SAVE
                         </Button>
                     </DialogActions>
@@ -76,14 +78,13 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     _handleSubmitForm: (title, description, date, start) => {
         let startDate = `${date} ${start}`;
+
         startDate = Date.parse(startDate);
         dispatch(addEvent(title, description, startDate));
-    }
+    },
 });
 
-NewEvent = connect(mapStateToProps, mapDispatchToProps)(NewEvent)
+NewEvent = connect(mapStateToProps, mapDispatchToProps)(NewEvent);
 
 export default NewEvent;
-
-
 

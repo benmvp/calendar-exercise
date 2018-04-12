@@ -1,4 +1,5 @@
 const uuid = require('uuid/v4');
+
 /**
  * @return {object} An action object with a type of GET_EVENTS
  */

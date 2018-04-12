@@ -1,6 +1,6 @@
 import React, {PureComponent, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import { selectEvent } from '../actions';
+import {selectEvent} from '../actions';
 import {EVENT_PROP_TYPE} from './constants';
 
 import './TimeSlotEvent.css';

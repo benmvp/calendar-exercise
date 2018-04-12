@@ -23,7 +23,7 @@ class Page extends PureComponent {
         selectedEventId: PropTypes.number,
     }
 
-    componentWillMount () {
+    componentWillMount() {
         this.props.getEvents(DATA_SET);
         this.props.getDay(moment().toString());
     }
@@ -34,7 +34,7 @@ class Page extends PureComponent {
         let eventDetailOverlay;
 
         if (selectedEventId) {
-            eventDetailOverlay = <EventDetailOverlay />
+            eventDetailOverlay = <EventDetailOverlay />;
         }
 
         return (
@@ -58,8 +58,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getEvents: (events) => {dispatch(getEvents(events))},
-    getDay: (date) => {dispatch(updateDate(date))},
+    getEvents: (events) => {
+        dispatch(getEvents(events));
+    },
+    getDay: (date) => {
+        dispatch(updateDate(date));
+    },
 });
 
 Page = connect(
