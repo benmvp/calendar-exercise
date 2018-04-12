@@ -20,7 +20,10 @@ class Page extends PureComponent {
         getEvents: PropTypes.func.isRequired,
         getDay: PropTypes.func.isRequired,
 
-        selectedEventId: PropTypes.number,
+        selectedEventId: PropTypes.oneOfType([
+            PropTypes.number,
+            PropTypes.string,
+        ]),
     }
 
     componentWillMount() {

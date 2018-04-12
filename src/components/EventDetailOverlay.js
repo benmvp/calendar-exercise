@@ -9,7 +9,10 @@ import './EventDetailOverlay.css';
 class EventDetailOverlay extends PureComponent {
     static propTypes = {
         events: EVENTS_PROP_TYPE.isRequired,
-        selectedEventId: PropTypes.number.isRequired,
+        selectedEventId: PropTypes.oneOfType([
+            PropTypes.number,
+            PropTypes.string,
+        ]),
         _handleClose: PropTypes.func.isRequired,
     }
 
