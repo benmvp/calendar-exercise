@@ -1,13 +1,34 @@
 import React, {PureComponent, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import {EVENT_PROP_TYPE} from './constants';
+import {selectEvent} from '../actions';
 import {getDisplayDate, getDisplayHour} from '../utils';
 
 import './EventDetailOverlay.css';
 
-export default class EventDetailOverlay extends PureComponent {
+class EventDetailOverlay extends PureComponent {
     static propTypes = {
         event: EVENT_PROP_TYPE.isRequired,
         onClose: PropTypes.func.isRequired,
+    }
+
+    onEsc (e) {
+        if (e.keyCode === 27) {
+            this.props.onClose();
+        }
+    }
+
+    componentDidMount () {
+        this.onEsc = this.onEsc.bind(this);
+        document.addEventListener('keydown', this.onEsc);
+        document.getElementById('root').addEventListener('click', this.props.onClose);
+        document.body.style.overflow = "hidden";
+    }
+
+    componentWillUnmount () {
+        document.removeEventListener("keydown", this.onEsc);
+        document.getElementById('root').removeEventListener('click', this.props.onClose);
+        document.body.style.overflow = "auto";
     }
 
     render() {
@@ -25,8 +46,6 @@ export default class EventDetailOverlay extends PureComponent {
         let displayDateTime = `${displayDate} ${startHourDisplay} - ${endHourDisplay}`;
 
         // TODO: Add appropriate ARIA tags to overlay/dialog
-        // TODO: Support clicking outside of the overlay to close it
-        // TODO: Support clicking ESC to close it
         return (
             <section className="event-detail-overlay">
                 <div className="event-detail-overlay__container">
@@ -51,3 +70,13 @@ export default class EventDetailOverlay extends PureComponent {
         );
     }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+    onClose: () => {
+        dispatch(selectEvent(null));
+    },
+})
+
+EventDetailOverlay = connect(undefined, mapDispatchToProps)(EventDetailOverlay);
+
+export default EventDetailOverlay;
