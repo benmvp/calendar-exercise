@@ -1,18 +1,27 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Calendar from './Calendar';
 import DayNavigator from './DayNavigator';
 import EventDetailOverlay from './EventDetailOverlay';
 import {getEvents, updateDate} from '../actions';
-import {filterEventsByDay, getEventFromEvents} from '../utils';
+import {filterEventsByDay} from '../utils';
 import NewEvent from './NewEvent';
 import DATA_SET from '../utils/data';
+import {EVENTS_PROP_TYPE} from './constants';
 
 import './Page.css';
 
 const moment = require('moment');
 
 class Page extends PureComponent {
+    static propTypes = {
+        events: EVENTS_PROP_TYPE.isRequired,
+        day: PropTypes.string.isRequired,
+        getEvents: PropTypes.func.isRequired,
+        getDay: PropTypes.func.isRequired,
+
+        selectedEventId: PropTypes.number,
+    }
 
     componentWillMount () {
         this.props.getEvents(DATA_SET);
@@ -22,13 +31,10 @@ class Page extends PureComponent {
     render() {
         let {events, day, selectedEventId} = this.props;
         let filteredEvents = filterEventsByDay(events, day);
-        let selectedEvent = getEventFromEvents(events, selectedEventId);
         let eventDetailOverlay;
 
-        if (selectedEvent) {
-            eventDetailOverlay = (
-                <EventDetailOverlay event={selectedEvent} />
-            );
+        if (selectedEventId) {
+            eventDetailOverlay = <EventDetailOverlay />
         }
 
         return (
@@ -46,9 +52,9 @@ class Page extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-    events: state.events,
-    day: state.date,
-    selectedEventId: state.selectedEventId,
+    events: state.home.events,
+    day: state.home.date,
+    selectedEventId: state.home.selectedEventId,
 });
 
 const mapDispatchToProps = (dispatch) => ({

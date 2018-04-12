@@ -1,38 +1,39 @@
 import React, {PureComponent, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {EVENT_PROP_TYPE} from './constants';
 import {selectEvent} from '../actions';
-import {getDisplayDate, getDisplayHour} from '../utils';
+import {getDisplayDate, getDisplayHour, getEventFromEvents} from '../utils';
+import {EVENTS_PROP_TYPE} from './constants';
 
 import './EventDetailOverlay.css';
 
 class EventDetailOverlay extends PureComponent {
     static propTypes = {
-        event: EVENT_PROP_TYPE.isRequired,
-        onClose: PropTypes.func.isRequired,
+        events: EVENTS_PROP_TYPE.isRequired,
+        selectedEventId: PropTypes.number.isRequired,
+        _handleClose: PropTypes.func.isRequired,
     }
 
-    onEsc (e) {
-        if (e.keyCode === 27) {
-            this.props.onClose();
-        }
+    _handleEsc = (e) => {
+      if (e.keyCode === 27) {
+        this.props._handleClose();
+      }
     }
-
+    
     componentDidMount () {
-        this.onEsc = this.onEsc.bind(this);
-        document.addEventListener('keydown', this.onEsc);
-        document.getElementById('root').addEventListener('click', this.props.onClose);
-        document.body.style.overflow = "hidden";
+      document.addEventListener('keydown', this._handleEsc);
+      document.getElementById('calendar').addEventListener('click', this.props._handleClose);
+      document.body.style.overflow = "hidden";
     }
-
+    
     componentWillUnmount () {
-        document.removeEventListener("keydown", this.onEsc);
-        document.getElementById('root').removeEventListener('click', this.props.onClose);
-        document.body.style.overflow = "auto";
+      document.removeEventListener("keydown", this.onEsc);
+      document.getElementById('calendar').removeEventListener('click', this.props.onClose);
+      document.body.style.overflow = "auto";
     }
-
+    
     render() {
-        let {event, onClose} = this.props;
+        let {events, selectedEventId, _handleClose} = this.props;
+        let event = getEventFromEvents(events, selectedEventId);
         let {title, description, start, color, hours} = event;
         let displayDate = getDisplayDate(start);
         let startHour = (new Date(start)).getHours();
@@ -52,12 +53,15 @@ class EventDetailOverlay extends PureComponent {
                     <button
                         className="event-detail-overlay__close"
                         title="Close detail view"
-                        onClick={onClose}
+                        onClick={_handleClose}
                     />
                     <div>
                         {displayDateTime}
                         <span
-                            className={`event-detail-overlay__color event-detail-overlay__${color}`}
+                            className={
+                                `event-detail-overlay__color 
+                                event-detail-overlay__${color}`
+                            }
                             title={`Event label color: ${color}`}
                         />
                     </div>
@@ -71,12 +75,17 @@ class EventDetailOverlay extends PureComponent {
     }
 }
 
+const mapStateToProps = (state) => ({
+    events: state.home.events,
+    selectedEventId: state.home.selectedEventId,
+})
+
 const mapDispatchToProps = (dispatch) => ({
-    onClose: () => {
+    _handleClose: () => {
         dispatch(selectEvent(null));
     },
 })
 
-EventDetailOverlay = connect(undefined, mapDispatchToProps)(EventDetailOverlay);
+EventDetailOverlay = connect(mapStateToProps, mapDispatchToProps)(EventDetailOverlay);
 
 export default EventDetailOverlay;

@@ -6,7 +6,8 @@ const moment = require('moment');
  * @returns {string} The formatted date
  */
 export const getDisplayDate = (timestamp) => {
-    let date = moment(timestamp).format("dddd, MMMM Do, YYYY");
+    let date = moment(timestamp).format('dddd, MMMM Do, YYYY');
+
     return date.toString();
 };
 
@@ -18,7 +19,7 @@ export const getDisplayDate = (timestamp) => {
  * @returns {array}
  */
 export const filterEventsByDay = (events, timestamp) => (
-    events.filter(event => (
+    events.filter((event) => (
         getDisplayDate(timestamp) === getDisplayDate(event.start)
     ))
 );

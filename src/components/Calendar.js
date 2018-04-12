@@ -32,7 +32,7 @@ export default class Calendar extends PureComponent {
 
     render() {
         return (
-            <main className="calendar">
+            <main id="calendar" className="calendar">
                 {this._renderTimeSlots()}
             </main>
         );

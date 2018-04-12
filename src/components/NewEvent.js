@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import Button from 'material-ui/Button';
 import Dialog, {
   DialogActions,
@@ -10,33 +10,41 @@ import AddIcon from '@material-ui/icons/Add';
 import {connect} from 'react-redux';
 import {addEvent} from '../actions';
 
-class NewEvent extends React.Component {
+class NewEvent extends PureComponent {
+    static propTypes = {
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+        start: PropTypes.string.isRequired,
+        _handleSubmitForm: PropTypes.func.isRequired,
+    }
+
     state = {
         open: false,
     };
 
-    handleClickOpen = () => {
+    _handleClickOpen = () => {
         this.setState({ open: true });
     };
     
-    handleClose = () => {
+    _handleClose = () => {
         this.setState({ open: false });
     };
 
     render() {
-        let {title, description, date, start, submitForm} = this.props;
+        let {title, description, date, start, _handleSubmitForm} = this.props;
         return (
             <div className="new-event">
                 <Button 
                     mini color="secondary" 
                     variant="fab" 
-                    onClick={this.handleClickOpen}
+                    onClick={this._handleClickOpen}
                 >
                     <AddIcon />
                 </Button>
                 <Dialog
                     open={this.state.open}
-                    onClose={this.handleClose}
+                    onClose={this._handleClose}
                 >
                     <DialogTitle id="form-dialog-title">Create an Event</DialogTitle>
                     <DialogContent>
@@ -45,8 +53,8 @@ class NewEvent extends React.Component {
                     <DialogActions>
                         <Button 
                             onClick={() => {
-                              submitForm(title, description, date, start);
-                              this.handleClose();
+                                _handleSubmitForm(title, description, date, start);
+                                this._handleClose();
                             }} 
                             color="primary">
                             SAVE
@@ -66,11 +74,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  submitForm: (title, description, date, start) => {
-    let startDate = `${date} ${start}`;
-    startDate = Date.parse(startDate);
-    dispatch(addEvent(title, description, startDate));
-  }
+    _handleSubmitForm: (title, description, date, start) => {
+        let startDate = `${date} ${start}`;
+        startDate = Date.parse(startDate);
+        dispatch(addEvent(title, description, startDate));
+    }
 });
 
 NewEvent = connect(mapStateToProps, mapDispatchToProps)(NewEvent)

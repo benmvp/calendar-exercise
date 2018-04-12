@@ -6,7 +6,7 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import createHistory from 'history/createBrowserHistory';
 import logger from 'redux-logger';
 import App from './components/App';
-import calendarApp from './reducers';
+import calendarApp from './reducers/index';
 import './index.css';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
