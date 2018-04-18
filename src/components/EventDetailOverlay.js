@@ -11,19 +11,15 @@ export default class EventDetailOverlay extends PureComponent {
     }
 
     componentDidMount() {
-        let {onClose} = this.props;
-
         document.body.style.overflow = 'hidden';
         document.addEventListener('keydown', this._handleEscDown);
-        document.addEventListener('click', onClose);
+        document.addEventListener('click', this._handleOutsideClick);
     }
 
     componentWillUnmount() {
-        let {onClose} = this.props;
-
         document.body.style.overflow = 'auto';
         document.removeEventListener('keydown', this._handleEscDown);
-        document.removeEventListener('click', onClose);
+        document.removeEventListener('click', this._handleOutsideClick);
     }
 
     _handleEscDown = (e) => {
@@ -31,6 +27,14 @@ export default class EventDetailOverlay extends PureComponent {
 
         if (e.key === 'Escape') { onClose(); }
     };
+
+    _handleOutsideClick = (e) => {
+        let {onClose} = this.props;
+        let clickedValue = e.target.innerText;
+        let activeOverlay = this.props.event.title;
+
+        if (clickedValue !== activeOverlay) { onClose(); }
+    }
 
     render() {
         let {event, onClose} = this.props;
