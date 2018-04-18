@@ -13,6 +13,7 @@ export default class EventDetailOverlay extends PureComponent {
     componentDidMount() {
         let {onClose} = this.props;
 
+        document.body.style.overflow = 'hidden';
         document.addEventListener('keydown', this._handleEscDown);
         document.addEventListener('click', onClose);
     }
@@ -20,6 +21,7 @@ export default class EventDetailOverlay extends PureComponent {
     componentWillUnmount() {
         let {onClose} = this.props;
 
+        document.body.style.overflow = 'auto';
         document.removeEventListener('keydown', this._handleEscDown);
         document.removeEventListener('click', onClose);
     }
