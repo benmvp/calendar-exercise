@@ -4,4 +4,5 @@
 .calendar {
     border: 1px solid #666;
     border-radius: 10px;
+    background: linear-gradient(white, lightgray)
 }
