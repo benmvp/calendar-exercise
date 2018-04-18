@@ -20,6 +20,14 @@ export default class EventDetailOverlay extends PureComponent {
         page.addEventListener('click', onClose);
     }
 
+    componentWillUnmount() {
+        let {onClose} = this.props;
+        let page = document.querySelector('.page');
+
+        document.removeEventListener('keydown', this._handleEscDown);
+        page.removeEventListener('click', onClose);
+    }
+
 
     render() {
         let {event, onClose} = this.props;
