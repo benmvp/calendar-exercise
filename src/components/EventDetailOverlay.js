@@ -68,6 +68,7 @@ export default class EventDetailOverlay extends PureComponent {
                         <span
                             className="event-detail-overlay__color"
                             title={`Event label color: ${color}`}
+                            color={`${color}`}
                         />
                     </div>
                     <h1 className="event-detail-overlay__title">
