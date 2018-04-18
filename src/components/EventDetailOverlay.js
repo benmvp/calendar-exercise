@@ -22,12 +22,14 @@ export default class EventDetailOverlay extends PureComponent {
         document.removeEventListener('click', this._handleOutsideClick);
     }
 
+    // TODO: Support clicking ESC to close it
     _handleEscDown = (e) => {
         let {onClose} = this.props;
 
         if (e.key === 'Escape') { onClose(); }
     };
 
+    // TODO: Support clicking outside of the overlay to close it
     _handleOutsideClick = (e) => {
         let {onClose} = this.props;
         let clickedValue = e.target.innerText;
@@ -52,8 +54,6 @@ export default class EventDetailOverlay extends PureComponent {
 
         // TODO: The event label color should match the event color
         // TODO: Add appropriate ARIA tags to overlay/dialog
-        // TODO: Support clicking outside of the overlay to close it
-        // TODO: Support clicking ESC to close it
 
         return (
             <section className="event-detail-overlay">
