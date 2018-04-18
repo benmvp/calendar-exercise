@@ -9,10 +9,13 @@
     min-height: 3rem;
     box-sizing: border-box;
 
-    /**
-     * TODO: Figure out how not to have a bottom border on the last time-slot
-     * which causes a double border
-     */
+}
+/**
+  * TODO: Figure out how not to have a bottom border on the last time-slot
+  * which causes a double border
+*/
+.time-slot:last-child {
+  border-bottom: none;
 }
 .time-slot__hour-label {
     width: 4rem;
