@@ -5,4 +5,4 @@ export default class App extends PureComponent {
     render() {
         return (<Page />);
     }
-};
+}
