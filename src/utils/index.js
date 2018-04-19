@@ -53,7 +53,10 @@ export const getDisplayDate = (timestamp) => {
  * @returns {string}
  */
 // TODO: Implement using a more programmatic approach instead of map
-export const getDisplayHour = (hour) => _HOUR_DISPLAY_MAP[hour]
+export const getDisplayHour = (hour) => {
+    if (hour === 0) { return `12AM`; }
+    return hour <= 12 ? `${hour}AM` : `${hour - 12}PM`;
+};
 
 /**
  * Given a list of events, returns the event object whose id matches the specified eventId
