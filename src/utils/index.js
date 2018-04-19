@@ -9,11 +9,13 @@ const _DAY_DISPLAY_MAP = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'
  * @param {Date} timestamp - The timestamp representing the day to match
  * @returns {array}
  */
-export const filterEventsByDay = (events, timestamp) => (
-    events.filter(({start}) => (
-        new Date(timestamp)).getDay() === new Date(start).getDay()
-    )
-);
+export const filterEventsByDay = (events, timestamp) => {
+  return events.filter(({start}) => {
+      return new Date(timestamp).getMonth() === new Date(start).getMonth() &&
+             new Date(timestamp).getDate() === new Date(start).getDate() &&
+             new Date(timestamp).getFullYear() === new Date(start).getFullYear();
+  });
+};
 
 /**
  * Given a list of events and an hour number, filter the events down to those that
