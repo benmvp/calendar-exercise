@@ -1,6 +1,7 @@
 import {MILLISECONDS_DAY} from '../utils/constants';
 
 const _DAY_DISPLAY_MAP = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const _MONTH_DISPLAY_MAP = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 /**
  * Given a list of events and a date, filter the events down to those that
@@ -38,10 +39,9 @@ export const filterEventsByHour = (events, hour) => (
  */
 export const getDisplayDate = (timestamp) => {
     let date = new Date(timestamp);
-    let words = date.toString().split(' ');
 
     // TODO: Format the date like: "Tuesday, April 11, 2017"
-    return `${_DAY_DISPLAY_MAP[date.getDay()]}, ${words[1]} ${words[2]}, ${words[3]}`;
+    return `${_DAY_DISPLAY_MAP[date.getDay()]}, ${_MONTH_DISPLAY_MAP[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 };
 
 /**
