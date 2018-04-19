@@ -5,6 +5,8 @@ const _HOUR_DISPLAY_MAP = [
     '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM', '10PM', '11PM',
 ];
 
+const _DAY_OF_WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+
 /**
  * Given a list of events and a date, filter the events down to those that
  * fall on the same day as the date
@@ -39,10 +41,10 @@ export const filterEventsByHour = (events, hour) => (
  */
 export const getDisplayDate = (timestamp) => {
     let date = new Date(timestamp);
-
+    let words = date.toString().split(' ');
     // TODO: Format the date like: "Tuesday, April 11, 2017"
 
-    return date.toString();
+    return `${_DAY_OF_WEEK[date.getDay()]}, ${words[1]} ${words[2]}, ${words[3]}`;
 };
 
 /**
