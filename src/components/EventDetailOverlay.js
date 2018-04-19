@@ -54,14 +54,14 @@ export default class EventDetailOverlay extends PureComponent {
 
         // TODO: The event label color should match the event color
         // TODO: Add appropriate ARIA tags to overlay/dialog
-
         return (
-            <section className="event-detail-overlay">
-                <div className="event-detail-overlay__container">
+            <section className="event-detail-overlay" role="dialog">
+                <div className="event-detail-overlay__container" role="document">
                     <button
                         className="event-detail-overlay__close"
                         title="Close detail view"
                         onClick={onClose}
+                        aria-label="Close"
                     />
                     <div>
                         {displayDateTime}
