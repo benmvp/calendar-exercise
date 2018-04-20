@@ -1,7 +1,5 @@
-const _HOUR_DISPLAY_MAP = [
-    '12AM', '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7AM', '8AM', '9AM', '10AM', '11AM',
-    '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM', '10PM', '11PM',
-]
+const _DAY_DISPLAY_MAP = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const _MONTH_DISPLAY_MAP = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 /**
  * Given a list of events and a date, filter the events down to those that
@@ -11,10 +9,12 @@ const _HOUR_DISPLAY_MAP = [
  * @returns {array}
  */
 export const filterEventsByDay = (events, timestamp) => {
-    // TODO: Implement day filtering!
-
-    return events;
-}
+  return events.filter(({start}) => {
+      return new Date(timestamp).getMonth() === new Date(start).getMonth() &&
+             new Date(timestamp).getDate() === new Date(start).getDate() &&
+             new Date(timestamp).getFullYear() === new Date(start).getFullYear();
+  });
+};
 
 /**
  * Given a list of events and an hour number, filter the events down to those that
@@ -39,8 +39,7 @@ export const getDisplayDate = (timestamp) => {
     let date = new Date(timestamp);
 
     // TODO: Format the date like: "Tuesday, April 11, 2017"
-
-    return date.toString();
+    return `${_DAY_DISPLAY_MAP[date.getDay()]}, ${_MONTH_DISPLAY_MAP[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 };
 
 /**
@@ -49,7 +48,10 @@ export const getDisplayDate = (timestamp) => {
  * @returns {string}
  */
 // TODO: Implement using a more programmatic approach instead of map
-export const getDisplayHour = (hour) => _HOUR_DISPLAY_MAP[hour]
+export const getDisplayHour = (hour) => {
+    if (hour === 0) { return `12AM`; }
+    return hour <= 12 ? `${hour}AM` : `${hour - 12}PM`;
+};
 
 /**
  * Given a list of events, returns the event object whose id matches the specified eventId
