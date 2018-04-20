@@ -1,5 +1,3 @@
-import {MILLISECONDS_DAY} from '../utils/constants';
-
 const _DAY_DISPLAY_MAP = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const _MONTH_DISPLAY_MAP = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
