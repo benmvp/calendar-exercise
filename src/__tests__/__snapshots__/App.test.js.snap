@@ -1,0 +1,305 @@
+exports[`test renders correctly 1`] = `
+<div
+  className="page">
+  <header
+    className="page__header">
+    <h1
+      className="page__title">
+      Daily Agenda
+    </h1>
+  </header>
+  <nav
+    className="page__nav">
+    <button
+      className="page__nav-button page__prev-day"
+      onClick={[Function]}
+      title="Go to previous day" />
+    <h2
+      className="page__date">
+      Thursday, April 19, 2018
+    </h2>
+    <button
+      className="page__nav-button page__next-day"
+      onClick={[Function]}
+      title="Go to next day" />
+  </nav>
+  <main
+    className="calendar">
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        12AM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        1AM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        2AM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        3AM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        4AM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        5AM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        6AM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        7AM
+      </span>
+      <div
+        className="time-slot__events">
+        <div
+          className="time-slot__event">
+          <button
+            className="time-slot-event time-slot-event--sky"
+            onClick={[Function]}
+            opacity={0.5}>
+            Advanced needs-based definition
+          </button>
+        </div>
+      </div>
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        8AM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        9AM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        10AM
+      </span>
+      <div
+        className="time-slot__events">
+        <div
+          className="time-slot__event">
+          <button
+            className="time-slot-event time-slot-event--sky"
+            onClick={[Function]}
+            opacity={0.5}>
+            Team-oriented next generation solution
+          </button>
+        </div>
+        <div
+          className="time-slot__event">
+          <button
+            className="time-slot-event time-slot-event--canary"
+            onClick={[Function]}
+            opacity={0.5}>
+            De-engineered disintermediate functionalities
+          </button>
+        </div>
+      </div>
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        11AM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        12AM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        1PM
+      </span>
+      <div
+        className="time-slot__events">
+        <div
+          className="time-slot__event">
+          <button
+            className="time-slot-event time-slot-event--shamrock"
+            onClick={[Function]}
+            opacity={0.5}>
+            Open-architected bifurcated budgetary management
+          </button>
+        </div>
+      </div>
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        2PM
+      </span>
+      <div
+        className="time-slot__events">
+        <div
+          className="time-slot__event">
+          <button
+            className="time-slot-event time-slot-event--canary"
+            onClick={[Function]}
+            opacity={0.5}>
+            Sharable client-server secured line
+          </button>
+        </div>
+      </div>
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        3PM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        4PM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        5PM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        6PM
+      </span>
+      <div
+        className="time-slot__events">
+        <div
+          className="time-slot__event">
+          <button
+            className="time-slot-event time-slot-event--sky"
+            onClick={[Function]}
+            opacity={0.5}>
+            Grass-roots intangible standardization
+          </button>
+        </div>
+      </div>
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        7PM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        8PM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        9PM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        10PM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+    <section
+      className="time-slot">
+      <span
+        className="time-slot__hour-label">
+        11PM
+      </span>
+      <div
+        className="time-slot__events" />
+    </section>
+  </main>
+</div>
+`;

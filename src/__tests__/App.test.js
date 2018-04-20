@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow } from 'enzyme';
 import App from '../components/App';
+import renderer from 'react-test-renderer';
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<App />, div);
 });
 
-it('renders 1 <App /> component', () => {
-    const component = shallow(<App />);
-
-    expect(component).toHaveLength(1);
-});
+it('renders correctly', () => {
+  const component = renderer.create(<App />);
+  const tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+})
