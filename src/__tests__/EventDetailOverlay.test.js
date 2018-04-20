@@ -1,24 +1,38 @@
 import React from 'react';
 import { expect } from 'chai';
-import { mount } from 'enzyme';
-import { spy } from 'sinon';
 import EventDetailOverlay from '../components/EventDetailOverlay';
-
-spy(EventDetailOverlay.prototype, 'componentDidMount');
+import TimeSlotEvent from '../components/TimeSlotEvent';
 
 describe('<EventDetailOverlay />', () => {
-  it('calls componentDidMount once', () => {
-    const selectedEvent = {
+    spy(EventDetailOverlay.prototype, 'componentDidMount');
+
+    const minProps = {
+        event: {},
+        onClose: function(){},
+        onSelect: function(){}
+    }
+
+    const event = {
       color: 'canary',
       description: 'Nulla tempus.',
       hours: 1,
       id: 42,
       start: 1524243600000,
-      title: 'De-engineered disintermediate functionalities'
-    }
+      title: 'De-engineered disintermediate functionalities',
+    };
 
-    const wrapper = mount(<EventDetailOverlay event={selectedEvent}/>);
+    it('renders without crashing', () => {
+        const wrapper = shallow(<EventDetailOverlay {...minProps} event={event} />);
 
-    expect(EventDetailOverlay.prototype.componentDidMount.calledOnce).to.equal(true);
-  });
+        expect(wrapper.length).to.equal(1);
+    });
+
+    it('calls componentDidMount once', () => {
+        const timeSlotEvent = shallow(<TimeSlotEvent {...minProps} event={event} />);
+
+        timeSlotEvent.find('button').simulate('click');
+        expect(EventDetailOverlay.prototype.componentDidMount.calledOnce).to.equal(true);
+    });
+
+
 });
